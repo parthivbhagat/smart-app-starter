@@ -7,6 +7,8 @@
   </head>
   <body style="margin: none;">
     <h2>SMART STARTER APP ( PATIENT DEMOGRAPHICS )</h2>
+    <div id='errors'>
+    </div>
     <div id='holder'>
     </div>
    
@@ -16,9 +18,17 @@
   <script src='./lib/jquery.min.js'></script>
   <script src='./draw_visualization.js'></script>
   <script>
-      extractData().then(function(p){
-        draw_visualization(p);
-      });
+      extractData().then(
+        function(p){
+
+          draw_visualization(p);
+
+        }, function(){
+
+          $('#errors').html('<p> Failed to call FHIR Service </p>');
+
+        }
+      );
 
   </script>
 </html>

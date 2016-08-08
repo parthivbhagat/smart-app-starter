@@ -2,10 +2,14 @@
   window.extractData = function() {
     var ret = $.Deferred();
 
-    FHIR.oauth2.ready(function(smart){
+    FHIR.oauth2.ready(onReady, onError);
+
+    function onReady(smart){
       var patient = smart.patient;
       var pt = patient.read();
-     
+      
+      $.when(pt).fail(onError);
+
       $.when(pt).done(function(patient){
         var gender = patient.gender;
         var dob = new Date(patient.birthDate);     
@@ -28,7 +32,14 @@
         ret.resolve(p);
     
       });
-    });
+    };
+
+
+    function onError(){
+      console.log("Loading error", arguments);
+      ret.reject();
+    };
+    
     return ret.promise();
   };
   
@@ -50,7 +61,7 @@
 
   
   function defaultPatient(){
-  return {
+    return {
      'fname' : {'value': null}
     ,'lname' : {'value': null}
     ,'gender' : {'value': null}
