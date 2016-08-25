@@ -29,6 +29,4 @@ You're going to need:
 4. Edit your files depending on what resources you need to call and front end you need users to see. Edit the files based on documenation here https://parthivbhagat.github.io/slate/index.html
 5. Run `npm install`
 6. Run `npm run build` to transpile code from ES6 to ES5 and minify the main css and js files
-7. To run tests do `npm run test` 
-
-
+7. To run tests do `npm run test`
